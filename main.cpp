@@ -1,253 +1,437 @@
 #include <iostream>
-#include <ctime>
-#include <cstdlib>
+#include <vector>
+
 using namespace std;
-#define N 9
+
+class Sudoku{
+    public:
+    int rendom_number;
+    int choice;
 
 
-class sudoku{
-	int user_input_grid[N][N]={
-   {0, 0, 0, 0, 0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0, 0, 0, 0, 0}
-	};
-	int options;
-	int rendom_number;
+    vector<vector<int>> inputboardformodule2{
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {0, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0}
+    };
 
-	public:
-	void main_menu();
-	void get_grid_input();
-	void display_input_grid();
-	void copy_inputgrid_to_solver_grid();
-	void solver();
-	void rendom_question();
+    vector<vector<int>> inputboard{
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {0, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0}
+    };
+    
+    vector<vector<int>> board{
+        {3, 0, 6, 5, 0, 8, 4, 0, 0},
+        {5, 2, 0, 0, 0, 0, 0, 0, 0},
+        {0, 8, 7, 0, 0, 0, 0, 3, 1},
+        {0, 0, 3, 0, 1, 0, 0, 8, 0},
+        {9, 0, 0, 8, 6, 3, 0, 0, 5},
+        {0, 5, 0, 0, 9, 0, 6, 0, 0},
+        {1, 3, 0, 0, 0, 0, 2, 5, 0},
+        {0, 0, 0, 0, 0, 0, 0, 7, 4},
+        {0, 0, 5, 2, 0, 6, 3, 0, 0}
+    };
+
+     vector<vector<int>> board1{
+        {3, 0, 6, 5, 0, 8, 4, 0, 0},
+        {5, 2, 0, 0, 0, 0, 0, 0, 0},
+        {0, 8, 7, 0, 0, 0, 0, 3, 1},
+        {0, 0, 3, 0, 1, 0, 0, 8, 0},
+        {9, 0, 0, 8, 6, 3, 0, 0, 5},
+        {0, 5, 0, 0, 9, 0, 6, 0, 0},
+        {1, 3, 0, 0, 0, 0, 2, 5, 0},
+        {0, 0, 0, 0, 0, 0, 0, 7, 4},
+        {0, 0, 5, 2, 0, 6, 3, 0, 0}
+    };  
+
+    
+        vector<vector<int>> board2{
+        {0, 0, 0, 0, 0, 0, 6, 8, 0},
+        {0, 0, 0, 0, 7, 3, 0, 0, 9},
+        {3, 0, 9, 0, 0, 0, 0, 4, 5},
+        {4, 9, 0, 0, 0, 0, 0, 0, 0},
+        {8, 0, 3, 0, 5, 0, 9, 0, 2},
+        {0, 0, 0, 0, 0, 0, 0, 3, 6},
+        {9, 6, 0, 0, 0, 0, 3, 0, 8},
+        {7, 0, 0, 6, 8, 0, 0, 0, 0},
+        {0, 2, 8, 0, 0, 0, 0, 0, 0}
+    };
+
+
+        
+        vector<vector<int>> board3{
+        {2, 0, 0, 3, 0, 0, 0, 0, 0},
+        {8, 0, 4, 0, 6, 2, 0, 0, 3},
+        {0, 1, 3, 8, 0, 0, 2, 0, 0},
+        {0, 0, 0, 0, 2, 0, 3, 9, 0},
+        {5, 0, 7, 0, 0, 0, 6, 2, 1},
+        {0, 3, 2, 0, 0, 6, 0, 0, 0},
+        {0, 2, 0, 0, 0, 9, 1, 4, 0},
+        {6, 0, 1, 2, 5, 0, 8, 0, 9},
+        {0, 0, 0, 0, 0, 1, 0, 0, 2}
+    };
+
+
+
+    
+        vector<vector<int>> board4{
+        {0, 2, 0, 6, 0, 8, 0, 0, 0},
+        {5, 8, 0, 0, 0, 9, 7, 0, 0},
+        {0, 0, 0, 0, 4, 0, 0, 0, 0},
+        {3, 7, 0, 0, 0, 0, 5, 0, 0},
+        {6, 0, 0, 0, 0, 0, 0, 0, 4},
+        {0, 0, 8, 0, 0, 0, 0, 1, 3},
+        {0, 0, 0, 0, 2, 0, 0, 0, 0},
+        {0, 0, 9, 8, 0, 0, 0, 3, 6},
+        {0, 0, 0, 3, 0, 6, 0, 9, 0}
+    };
+
+        
+        vector<vector<int>> board5{
+        {0, 0, 0, 6, 0, 0, 4, 0, 0},
+        {7, 0, 0, 0, 0, 3, 6, 0, 0},
+        {0, 0, 0, 0, 9, 1, 0, 8, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 5, 0, 1, 8, 0, 0, 0, 3},
+        {0, 0, 0, 3, 0, 6, 0, 4, 5},
+        {0, 4, 0, 2, 0, 0, 0, 6, 0},
+        {9, 0, 3, 0, 0, 0, 0, 0, 0},
+        {0, 2, 0, 0, 0, 0, 1, 0, 0}
+
+        };
+
+
+
+        
+        vector<vector<int>> board6{
+        {0, 2, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 6, 0, 0, 0, 0, 3},
+        {0, 7, 4, 0, 8, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 3, 0, 0, 2},
+        {0, 8, 0, 0, 4, 0, 0, 1, 0},
+        {6, 0, 0, 5, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 1, 0, 7, 8, 0},
+        {5, 0, 0, 0, 0, 9, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 4, 0}
+        };
+
+       
+        vector<vector<int>> board7{
+        {0, 0, 0, 0, 0, 0, 6, 8, 0},
+        {0, 0, 0, 0, 7, 3, 0, 0, 9},
+        {3, 0, 9, 0, 0, 0, 0, 4, 5},
+        {4, 9, 0, 0, 0, 0, 0, 0, 0},
+        {8, 0, 3, 0, 5, 0, 9, 0, 2},
+        {0, 0, 0, 0, 0, 0, 0, 3, 6},
+        {9, 6, 0, 0, 0, 0, 3, 0, 8},
+        {7, 0, 0, 6, 8, 0, 0, 0, 0},
+        {0, 2, 8, 0, 0, 0, 0, 0, 0}
+        };
+
+        
+        vector<vector<int>> board8{
+        {0, 2, 0, 6, 0, 8, 0, 0, 0},
+        {5, 8, 0, 0, 0, 9, 7, 0, 0},
+        {0, 0, 0, 0, 4, 0, 0, 0, 0},
+        {3, 7, 0, 0, 0, 0, 5, 0, 0},
+        {6, 0, 0, 0, 0, 0, 0, 0, 4},
+        {0, 0, 8, 0, 0, 0, 0, 1, 3},
+        {0, 0, 0, 0, 2, 0, 0, 0, 0},
+        {0, 0, 9, 8, 0, 0, 0, 3, 6},
+        {0, 0, 0, 3, 0, 6, 0, 9, 0}
+        };
+
+        
+        vector<vector<int>> board9{
+        {1, 0, 0, 4, 8, 9, 0, 0, 6},
+        {7, 3, 0, 0, 0, 0, 0, 4, 0},
+        {0, 0, 0, 0, 0, 1, 2, 9, 5},
+        {0, 0, 7, 1, 2, 0, 6, 0, 0},
+        {5, 0, 0, 7, 0, 3, 0, 0, 8},
+        {0, 0, 6, 0, 9, 5, 7, 0, 0},
+        {9, 1, 4, 6, 0, 0, 0, 0, 0},
+        {0, 2, 0, 0, 0, 0, 0, 3, 7},
+        {8, 0, 0, 5, 1, 2, 0, 0, 4}
+        };
+
+        
+        vector<vector<int>> board10{
+        {0, 0, 0, 0, 0, 0, 6, 8, 0},
+        {0, 0, 0, 0, 7, 3, 0, 0, 9},
+        {3, 0, 9, 0, 0, 0, 0, 4, 5},
+        {4, 9, 0, 0, 0, 0, 0, 0, 0},
+        {8, 0, 3, 0, 5, 0, 9, 0, 2},
+        {0, 0, 0, 0, 0, 0, 0, 3, 6},
+        {9, 6, 0, 0, 0, 0, 3, 0, 8},
+        {7, 0, 0, 6, 8, 0, 0, 0, 0},
+        {0, 2, 8, 0, 0, 0, 0, 0, 0}
+        };
+    
+    void solveSudoku(vector<vector<int>>& sudoku);
+    bool solve(vector<vector<int>>& board);
+    bool isSafe(int row , int col , vector<vector<int>>& board , int val);
+    void printBoard(vector<vector<int>>& board);
+    void rendomBoard(vector<vector<int>>& board);
+    void getBoard(vector<vector<int>>& board);
+    void getBoardformodule2(vector<vector<int>>& board);
+    void mainmenu();
+    void module1();
+    void module2();
+    void module3();
 };
 
 
-int grid[N][N] = {
-   {0, 0, 0, 0, 0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0, 0, 0, 0, 0}
-};
+void Sudoku::module3(){
+    getBoard(inputboard);
+    solveSudoku(inputboard);
+    getBoardformodule2(inputboardformodule2);
 
-void sudoku::rendom_question(){
-	srand(time(0));
+    if(inputboardformodule2 == inputboard){
+        cout << "Correct Solution" << endl;
+    }
+    else{
+        cout << "Wrong Solution as per the generated solution in our system " << endl;
+    }
+
+}
+
+void Sudoku::module2(){
+    rendomBoard(board);
+    cout << "Question : " << endl;
+    printBoard(board);
+    inputboardformodule2 = board;
+    inputboard = board;
+    solveSudoku(board);
+    getBoardformodule2(inputboardformodule2);
+
+    if(inputboardformodule2 == board){
+        cout << "Correct Solution" << endl;
+    }
+    else{
+        cout << "Wrong Solution" << endl;
+    }
+}
+
+void Sudoku::module1(){
+    cout << "Enter the question : " << endl;
+    getBoard(inputboard);
+    cout << "Question : " << endl;
+    printBoard(board);
+    solveSudoku(board);
+    cout << "Solution : " << endl;
+    printBoard(board);
+}
+
+
+void Sudoku::mainmenu(){
+    cout << "Welcome to Sudoku Game" << endl;
+    cout << "1. Play Game" << endl;
+    cout << "2. Exit" << endl;
+    cout << "Enter your choice : " << endl;
+    cin >> choice;
+
+    if(choice == 1){
+        cout << " 1 . Enter a question and get the solution" << endl;
+        cout << " 2 . Get a random question and solve it" << endl;
+        cout << " 3 . Enter a question and check solution validity" << endl;
+
+        cout << "Enter your choice : " << endl;
+        cin >> choice;
+
+        switch(choice){
+            case 1:
+                module1();
+                break;
+            case 2:
+                module2();
+                break;
+            case 3:
+                module3();
+                break;
+            default:
+                cout << "Invalid choice" << endl;
+                break;
+        }
+    }
+    else{
+        exit(0);
+    }
+
+}
+
+void Sudoku::getBoardformodule2(vector<vector<int>>& inputboardformodule2){
+
+    for (int i = 0 ; i < inputboardformodule2.size() ; i++){
+        for (int j = 0 ; j < inputboardformodule2[0].size() ; j++){
+            inputboardformodule2[i][j] = 1;
+            system("clear");
+            printBoard(inputboard);
+            cout << "=======================" <<endl;
+            printBoard(inputboardformodule2);  
+            cout << "Enter the number in place of 1 displayed in above grid " << endl;
+            cin >> inputboardformodule2[i][j];
+
+        }
+        cout << endl;
+    }
+    
+}
+void Sudoku::getBoard(vector<vector<int>>& inputboard){
+    for (int i = 0 ; i < inputboard.size() ; i++){
+        for (int j = 0 ; j < inputboard[0].size() ; j++){
+            inputboard[i][j] = 1;
+            system("clear");
+            printBoard(inputboard);  
+            cout << "Enter the number in place of 1 displayed in above grid " << endl;
+            cin >> inputboard[i][j];
+
+        }
+        cout << endl;
+
+        board = inputboard;
+
+    
+    }
+    
+}
+
+void Sudoku::rendomBoard(vector<vector<int>>& board){
+    // generate random numbsrand(time(0));
+    srand(time(0));
 	for(int i= 0 ; i < 1 ; i++){
-		rendom_number = (rand()%100 ) +1;
-	}
-	cout << rendom_number;
-	switch(rendom_number){
-		
-			
-		case 1:
-				{
-	int rendom_grid[N][N] ={
-   {0, 0, 0, 0, 0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0, 0, 0, 0, 0}
-	};
-
-	cout << endl;
-	cout << "THE QUESTION IS : " << endl;
-
-	 for (int row = 0; row < N; row++){
-      for (int col = 0; col < N; col++){
-         if(col == 3 || col == 6)
-            cout << " | ";
-         cout << grid[row][col] <<" ";
-      }
-      if(row == 2 || row == 5){
-         cout << endl;
-         for(int i = 0; i<N; i++)
-            cout << "---";
-      }
-      cout << endl;
-
-		}
-	 //start from here ;;;;;;
-
-				
-				}
-	 break;
-
-		case 2:
-	 {
-	 cout << "case 2" << endl;
-	 }
-	 break;
-
-
-	   case 3:{
-
-			  }
-
-
-	cout << "case 3" << endl;
-	break;
+		rendom_number = (rand()%10 ) +1;
 	}
 
-	
-}
+    switch(rendom_number){
+        case 1:
+            board = board1;
+            break;
 
-bool isPresentInCol(int col, int num){ //check whether num is present in col or not
-   for (int row = 0; row < N; row++)
-      if (grid[row][col] == num)
-         return true;
-   return false;
-}
-bool isPresentInRow(int row, int num){ //check whether num is present in row or not
-   for (int col = 0; col < N; col++)
-      if (grid[row][col] == num)
-         return true;
-   return false;
-}
-bool isPresentInBox(int boxStartRow, int boxStartCol, int num){
-//check whether num is present in 3x3 box or not
-   for (int row = 0; row < 3; row++)
-      for (int col = 0; col < 3; col++)
-         if (grid[row+boxStartRow][col+boxStartCol] == num)
-            return true;
-   return false;
-}
-void sudokuGrid(){ //print the sudoku grid after solve
-	for(int i= 0 ; i < 46 ; i++){
-	cout << "-";
-	}
-	cout << endl;
-	cout << " THE SOLUTION IS " << endl;
-   for (int row = 0; row < N; row++){
-      for (int col = 0; col < N; col++){
-         if(col == 3 || col == 6)
-            cout << " | ";
-         cout << grid[row][col] <<" ";
-      }
-      if(row == 2 || row == 5){
-         cout << endl;
-         for(int i = 0; i<N; i++)
-            cout << "---";
-      }
-      cout << endl;
-   }
-}
-bool findEmptyPlace(int &row, int &col){ //get empty location and update row and column
-   for (row = 0; row < N; row++)
-      for (col = 0; col < N; col++)
-         if (grid[row][col] == 0) //marked with 0 is empty
-            return true;
-   return false;
-}
-bool isValidPlace(int row, int col, int num){
-   //when item not found in col, row and current 3x3 box
-   return !isPresentInRow(row, num) && !isPresentInCol(col, num) && !isPresentInBox(row - row%3 ,
-col - col%3, num);
-}
-bool solveSudoku(){
-   int row, col;
-   if (!findEmptyPlace(row, col))
-      return true; //when all places are filled
-   for (int num = 1; num <= 9; num++){ //valid numbers are 1 - 9
-      if (isValidPlace(row, col, num)){ //check validation, if yes, put the number in the grid
-         grid[row][col] = num;
-         if (solveSudoku()) //recursively go for other rooms in the grid
-            return true;
-         grid[row][col] = 0; //turn to unassigned space when conditions are not satisfied
-      }
-   }
-   return false;
-}
 
-void sudoku::main_menu(){
-	for(int i = 0 ; i < 46 ; i++){
-		cout << "-" ;
-	}
-	cout << endl;
-	cout << "\tWELCOME TO SUDOKU GAME " << endl;
-	for(int i = 0 ; i < 46 ; i++){
-		cout << "-" ;
-	}
-	cout << endl;
-	cout << "\t SELECT GAME MODE" << endl;
-	cout << "[1] - Get a rendom qustion to solve " << endl << "[2] - Input a question to get the solution " << endl;
-	cin >> options;
-	if(options == 1){
-		rendom_question();
-	}
-	else if(options == 2){
-	get_grid_input();
-	}
+        case 2:
+            board = board2;
+            break;
+
+
+        case 3:
+            board = board3;
+            break;  
+
+
+        case 4:
+            board = board4;
+            break;
+
+
+        case 5:
+            board = board5;
+            break;
+
+
+        case 6: 
+            board = board6;
+            break;
+
+
+        case 7:
+            board = board7;
+            break;
+
+
+        case 8:
+            board = board8;
+            break;  
+
+
+        case 9:
+            board = board9;
+            break;
+
+
+        case 10:
+            board = board10;
+            break;
+       
+    }
+
 
 
 }
 
-void sudoku::get_grid_input(){
-	for(int i = 0 ; i < N ; i++){
-	for (int j = 0 ; j < N ; j++){
-	user_input_grid[i][j] = 1;
-	system("clear");
-	display_input_grid();
-	cout << "Enter a number to relace a number in the place of 1 in the above grid " << endl;
-	
-	cin >> user_input_grid[i][j];
-			
+void Sudoku::printBoard(vector<vector<int>>& board){
+    for (int i = 0 ; i < board.size() ; i++){
+        for (int j = 0 ; j < board[0].size() ; j++){
+            cout << board[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
 
-	}}
+void Sudoku::solveSudoku(vector<vector<int>>& sudoku){
+    solve(sudoku);
+};
 
-	copy_inputgrid_to_solver_grid();
-	solver();
+bool Sudoku::solve(vector<vector<int>>& board){
+    int n = board[0].size(); 
+    for (int row = 0 ; row < n ; row++){
+        for(int col = 0 ; col< n ; col++){
+            if(board[row][col] == 0){
+                for(int val = 1 ; val <= 9 ; val++){
+                    if(isSafe(row , col , board , val)){
+                        board[row][col] = val;
 
+                        bool solved = solve(board);
+                        if(solved){
+                            return true;
+                        }
+                        else{
+                            board[row][col] = 0;
+                        }
+                    }
+                }
+                return false;
+            }
+        }
+    }
 }
 
 
-void sudoku::display_input_grid(){
-	
-	 for (int row = 0; row < N; row++){
-      for (int col = 0; col < N; col++){
-         if(col == 3 || col == 6)
-            cout << " | ";
-         cout << user_input_grid[row][col] <<" ";
-      }
-      if(row == 2 || row == 5){
-         cout << endl;
-         for(int i = 0; i<N; i++)
-            cout << "---";
-      }
-      cout << endl;
-   }
+bool Sudoku::isSafe(int row , int col , vector<vector<int>>& board , int val){
+    for (int i = 0 ; i < board.size()  ; i++){
+        // check for row
+        if(board[row][i] == val){
+            return false;
+        }
+        // check for col
+        if(board[i][col] == val){
+            return false;
+        }
+        // check for subgrid
+        if(board[(row/3)*3 + i/3][(col/3)*3 + i%3] == val){
+            return false;
+        }
+
+
+    }
+
+    return true;
 }
 
-
-void sudoku::copy_inputgrid_to_solver_grid(){
-	for(int i  = 0 ; i < N ; i++){
-		for(int j = 0  ; j < N ; j++){
-			grid[i][j] = user_input_grid[i][j];
-		}}}
-
-void sudoku::solver(){
-	 if (solveSudoku() == true)
-      sudokuGrid();
-   else
-      cout << "No solution exists";
-}
 int main(){
-	sudoku a;
-	a.main_menu();
-	return 0;
+    Sudoku a;
+    a.mainmenu();
+    return 0;
 }
