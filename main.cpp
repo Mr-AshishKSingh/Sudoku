@@ -5,33 +5,33 @@ using namespace std;
 
 class Sudoku{
     public:
-    int rendom_number;
-    int choice;
+    int rendom_number; // random number for module 2
+    int choice; // VARIABLE TO STORE THE USER'S CHOICE
 
 
     vector<vector<int>> inputboardformodule2{
         {0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {0, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0}
-    };
+    }; 
 
     vector<vector<int>> inputboard{
         {0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {0, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0}
-    };
+    }; 
     
     vector<vector<int>> board{
         {3, 0, 6, 5, 0, 8, 4, 0, 0},
@@ -43,7 +43,7 @@ class Sudoku{
         {1, 3, 0, 0, 0, 0, 2, 5, 0},
         {0, 0, 0, 0, 0, 0, 0, 7, 4},
         {0, 0, 5, 2, 0, 6, 3, 0, 0}
-    };
+    }; 
 
      vector<vector<int>> board1{
         {3, 0, 6, 5, 0, 8, 4, 0, 0},
@@ -180,26 +180,26 @@ class Sudoku{
         {0, 2, 8, 0, 0, 0, 0, 0, 0}
         };
     
-    void solveSudoku(vector<vector<int>>& sudoku);
-    bool solve(vector<vector<int>>& board);
-    bool isSafe(int row , int col , vector<vector<int>>& board , int val);
-    void printBoard(vector<vector<int>>& board);
-    void rendomBoard(vector<vector<int>>& board);
-    void getBoard(vector<vector<int>>& board);
-    void getBoardformodule2(vector<vector<int>>& board);
-    void mainmenu();
-    void module1();
-    void module2();
-    void module3();
+    void solveSudoku(vector<vector<int>>& sudoku); //FUNCTION WHICH CALLS THE SOLVE FUNCTION
+    bool solve(vector<vector<int>>& board); //FUNCTION TO SOLVE THE SUDOKU 
+    bool isSafe(int row , int col , vector<vector<int>>& board , int val); //FUNCTION TO CHECK IF THE VALUE IS SAFE TO INSERT IN THE BOARD
+    void printBoard(vector<vector<int>>& board); //FUNCTION TO PRINT THE BOARD
+    void rendomBoard(vector<vector<int>>& board); // FUNCTION TO GENERATE A RANDOM BOARD
+    void getBoard(vector<vector<int>>& board); //FUNCTION TO GET THE BOARD FROM THE USER
+    void getBoardformodule2(vector<vector<int>>& board); //FUNCTION TO GET THE BOARD FROM THE USER FOR MODULE 2
+    void mainmenu(); //FUNCTION TO PRINT THE MAIN MENU
+    void module1();//FUNCTION TO PRINT THE MODULE 1
+    void module2();//FUNCTION TO PRINT THE MODULE 2
+    void module3();//FUNCTION TO PRINT THE MODULE 3
 };
 
 
 void Sudoku::module3(){
-    getBoard(inputboard);
-    solveSudoku(inputboard);
-    getBoardformodule2(inputboardformodule2);
+    getBoard(inputboard); //GETTING INPUT FROM THE USER FOR THE BOARD
+    solveSudoku(inputboard); //SOLVING THE BOARD
+    getBoardformodule2(inputboardformodule2); //GETTING THE SOLUTION  FROM THE USER OF THE INPUT BOARD
 
-    if(inputboardformodule2 == inputboard){
+    if(inputboardformodule2 == inputboard){ //COMPARING THE SOLUTION WITH THE INPUT BOARD
         cout << "Correct Solution" << endl;
     }
     else{
@@ -209,15 +209,15 @@ void Sudoku::module3(){
 }
 
 void Sudoku::module2(){
-    rendomBoard(board);
+    rendomBoard(board); //generating a random board
     cout << "Question : " << endl;
-    printBoard(board);
-    inputboardformodule2 = board;
-    inputboard = board;
-    solveSudoku(board);
-    getBoardformodule2(inputboardformodule2);
+    printBoard(board); // PRINTING THE RENDOM BOARD
+    inputboardformodule2 = board;    //storing the rendom board in a variable
+    inputboard = board; //storing the rendom board in a variable SO THAT WE CAN COMPARE THE SOLUTION WITH THE RENDOM BOARD
+    solveSudoku(board); //SOLVING THE RENDOM BOARD
+    getBoardformodule2(inputboardformodule2); //GETTING THE SOLUTION  FROM THE USER OF THE RENDOM BOARD
 
-    if(inputboardformodule2 == board){
+    if(inputboardformodule2 == board){ //COMPARING THE SOLUTION WITH THE RENDOM BOARD
         cout << "Correct Solution" << endl;
     }
     else{
@@ -227,12 +227,12 @@ void Sudoku::module2(){
 
 void Sudoku::module1(){
     cout << "Enter the question : " << endl;
-    getBoard(inputboard);
+    getBoard(inputboard); // GETTING THE QUESTION FROM THE USER
     cout << "Question : " << endl;
-    printBoard(board);
-    solveSudoku(board);
+    printBoard(board); // PRINTING THE QUESTION
+    solveSudoku(board); // SOLVING THE QUESTION
     cout << "Solution : " << endl;
-    printBoard(board);
+    printBoard(board); // PRINTING THE SOLVED SOLUTION
 }
 
 
@@ -241,32 +241,32 @@ void Sudoku::mainmenu(){
     cout << "1. Play Game" << endl;
     cout << "2. Exit" << endl;
     cout << "Enter your choice : " << endl;
-    cin >> choice;
+    cin >> choice; // TAKING THE CHOICE FROM THE USER
 
     if(choice == 1){
-        cout << " 1 . Enter a question and get the solution" << endl;
-        cout << " 2 . Get a random question and solve it" << endl;
-        cout << " 3 . Enter a question and check solution validity" << endl;
+        cout << " 1 . Enter a question and get the solution" << endl; // FOR MODULE 1
+        cout << " 2 . Get a random question and solve it" << endl; // FOR MODULE 2
+        cout << " 3 . Enter a question and check solution validity" << endl; // FOR MODULE 3
 
         cout << "Enter your choice : " << endl;
-        cin >> choice;
+        cin >> choice; //TAKING CHOICE FOR MODULE 1 , 2 , 3
 
         switch(choice){
-            case 1:
+            case 1: //IF CHOICE == 1 THEN CALL MODULE 1
                 module1();
                 break;
-            case 2:
+            case 2: //IF CHOICE == 2 THEN CALL MODULE 2
                 module2();
                 break;
-            case 3:
+            case 3: //IF CHOICE == 3 THEN CALL MODULE 3
                 module3();
                 break;
-            default:
+            default: //IF CHOICE IS NOT 1 , 2 , 3 THEN PRINT INVALID CHOICE
                 cout << "Invalid choice" << endl;
                 break;
         }
     }
-    else{
+    else{ //IF CHOICE IS NOT 1 THEN EXIT THE PROGRAM
         exit(0);
     }
 
@@ -276,20 +276,20 @@ void Sudoku::getBoardformodule2(vector<vector<int>>& inputboardformodule2){
 
     for (int i = 0 ; i < inputboardformodule2.size() ; i++){
         for (int j = 0 ; j < inputboardformodule2[0].size() ; j++){
-            inputboardformodule2[i][j] = 1;
+            inputboardformodule2[i][j] = 1; //INITIALISING A ELEMENT TO 1 IN BOARD WHERE USER HAS TO ENTER THE SOLUTION
             system("clear");
-            printBoard(inputboard);
+            printBoard(inputboard); //PRINTING THE QUESTION BOARD SO THAT USER CAN TAKE THE REFERENCE
             cout << "=======================" <<endl;
-            printBoard(inputboardformodule2);  
+            printBoard(inputboardformodule2);  //PRINTING THE BOARD WHERE USER HAS TO ENTER THE SOLUTION
             cout << "Enter the number in place of 1 displayed in above grid " << endl;
-            cin >> inputboardformodule2[i][j];
+            cin >> inputboardformodule2[i][j]; //TAKING INPUT FROM THE USER IN PLACE OF 1 DISPLAYED IN THE BOARD
 
         }
         cout << endl;
     }
     
 }
-void Sudoku::getBoard(vector<vector<int>>& inputboard){
+void Sudoku::getBoard(vector<vector<int>>& inputboard){ //FUNCTION TO GET THE BOARD FROM THE USER
     for (int i = 0 ; i < inputboard.size() ; i++){
         for (int j = 0 ; j < inputboard[0].size() ; j++){
             inputboard[i][j] = 1;
@@ -308,16 +308,16 @@ void Sudoku::getBoard(vector<vector<int>>& inputboard){
     
 }
 
-void Sudoku::rendomBoard(vector<vector<int>>& board){
+void Sudoku::rendomBoard(vector<vector<int>>& board){ //FUNCTION TO GENERATE A RENDOM BOARD
     // generate random numbsrand(time(0));
-    srand(time(0));
+    srand(time(0)); //SEEDING THE RANDOM FUNCTION
 	for(int i= 0 ; i < 1 ; i++){
-		rendom_number = (rand()%10 ) +1;
+		rendom_number = (rand()%10 ) +1; //GENERATING A RANDOM NUMBER BETWEEN 1 TO 10
 	}
 
-    switch(rendom_number){
+    switch(rendom_number){ //SWITCH CASE TO SELECT A BOARD FROM 10 BOARDS
         case 1:
-            board = board1;
+            board = board1; 
             break;
 
 
@@ -371,12 +371,12 @@ void Sudoku::rendomBoard(vector<vector<int>>& board){
 
 }
 
-void Sudoku::printBoard(vector<vector<int>>& board){
-    for (int i = 0 ; i < board.size() ; i++){
+void Sudoku::printBoard(vector<vector<int>>& board){ //FUNCTION TO PRINT THE BOARD
+    for (int i = 0 ; i < board.size() ; i++){ //LOOP TO PRINT THE BOARD
         for (int j = 0 ; j < board[0].size() ; j++){
-            cout << board[i][j] << " ";
+            cout << board[i][j] << " "; //PRINTING THE ELEMENTS OF THE BOARD
         }
-        cout << endl;
+        cout << endl; //PRINTING A NEW LINE AFTER EACH ROW
     }
 }
 
@@ -385,15 +385,15 @@ void Sudoku::solveSudoku(vector<vector<int>>& sudoku){
 };
 
 bool Sudoku::solve(vector<vector<int>>& board){
-    int n = board[0].size(); 
+    int n = board[0].size(); //GETTING THE SIZE OF THE BOARD
     for (int row = 0 ; row < n ; row++){
         for(int col = 0 ; col< n ; col++){
-            if(board[row][col] == 0){
-                for(int val = 1 ; val <= 9 ; val++){
-                    if(isSafe(row , col , board , val)){
-                        board[row][col] = val;
+            if(board[row][col] == 0){ //CHECKING IF THE ELEMENT IS 0
+                for(int val = 1 ; val <= 9 ; val++){ //CHECKING FOR ALL THE VALUES FROM 1 TO 9
+                    if(isSafe(row , col , board , val)){//CHECKING IF THE VALUE IS SAFE TO INSERT IN THE BOARD by calling is safe function
+                        board[row][col] = val; //IF VALUE SAFE THEN INSERT THE VALUE IN THE BOARD
 
-                        bool solved = solve(board);
+                        bool solved = solve(board); //CALLING THE SOLVE FUNCTION RECURSIVELY
                         if(solved){
                             return true;
                         }
