@@ -279,7 +279,7 @@ void Sudoku::getBoardformodule2(vector<vector<int>>& inputboardformodule2){
     for (int i = 0 ; i < inputboardformodule2.size() ; i++){
         for (int j = 0 ; j < inputboardformodule2[0].size() ; j++){
             inputboardformodule2[i][j] = 1; //INITIALISING A ELEMENT TO 1 IN BOARD WHERE USER HAS TO ENTER THE SOLUTION
-            system("clear");
+            system("cls");
             printBoard(inputboard); //PRINTING THE QUESTION BOARD SO THAT USER CAN TAKE THE REFERENCE
             cout << "=======================" <<endl;
             printBoard(inputboardformodule2);  //PRINTING THE BOARD WHERE USER HAS TO ENTER THE SOLUTION
@@ -295,7 +295,7 @@ void Sudoku::getBoard(vector<vector<int>>& inputboard){ //FUNCTION TO GET THE BO
     for (int i = 0 ; i < inputboard.size() ; i++){
         for (int j = 0 ; j < inputboard[0].size() ; j++){
             inputboard[i][j] = 1;
-            system("clear");
+            system("cls");
             printBoard(inputboard);  
             cout << "Enter the number in place of 1 displayed in above grid " << endl;
             cin >> inputboard[i][j];
