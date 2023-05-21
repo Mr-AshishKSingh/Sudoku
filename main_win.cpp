@@ -239,6 +239,7 @@ void Sudoku::module1(){
 
 
 void Sudoku::mainmenu(){
+    system("cls");
     cout << "Welcome to Sudoku Game" << endl;
     cout << "1. Play Game" << endl;
     cout << "2. Exit" << endl;
@@ -246,6 +247,7 @@ void Sudoku::mainmenu(){
     cin >> choice; // TAKING THE CHOICE FROM THE USER
 
     if(choice == 1){
+        system("cls");
         cout << " 1 . Enter a question and get the solution" << endl; // FOR MODULE 1
         cout << " 2 . Get a random question and solve it" << endl; // FOR MODULE 2
         cout << " 3 . Enter a question and check solution validity" << endl; // FOR MODULE 3
@@ -281,7 +283,9 @@ void Sudoku::getBoardformodule2(vector<vector<int>>& inputboardformodule2){
             inputboardformodule2[i][j] = 1; //INITIALISING A ELEMENT TO 1 IN BOARD WHERE USER HAS TO ENTER THE SOLUTION
             system("cls");
             printBoard(inputboard); //PRINTING THE QUESTION BOARD SO THAT USER CAN TAKE THE REFERENCE
+            cout << endl;
             cout << "=======================" <<endl;
+            cout << endl;
             printBoard(inputboardformodule2);  //PRINTING THE BOARD WHERE USER HAS TO ENTER THE SOLUTION
             cout << "Enter the number in place of 1 displayed in above grid " << endl;
             cin >> inputboardformodule2[i][j]; //TAKING INPUT FROM THE USER IN PLACE OF 1 DISPLAYED IN THE BOARD
@@ -374,12 +378,28 @@ void Sudoku::rendomBoard(vector<vector<int>>& board){ //FUNCTION TO GENERATE A R
 }
 
 void Sudoku::printBoard(vector<vector<int>>& board){ //FUNCTION TO PRINT THE BOARD
-    for (int i = 0 ; i < board.size() ; i++){ //LOOP TO PRINT THE BOARD
-        for (int j = 0 ; j < board[0].size() ; j++){
-            cout << board[i][j] << " "; //PRINTING THE ELEMENTS OF THE BOARD
-        }
-        cout << endl; //PRINTING A NEW LINE AFTER EACH ROW
-    }
+    // for (int i = 0 ; i < board.size() ; i++){ //LOOP TO PRINT THE BOARD
+    //     for (int j = 0 ; j < board[0].size() ; j++){
+    //         cout << board[i][j] << " "; //PRINTING THE ELEMENTS OF THE BOARD
+    //     }
+    //     cout << endl; //PRINTING A NEW LINE AFTER EACH ROW
+    // }
+
+
+
+    for (int row = 0; row < 9; row++){ //LOOP TO PRINT THE BOARD
+      for (int col = 0; col < 9; col++){ //column loop
+         if(col == 3 || col == 6) // for printing vertical lines after 3rd and 6th column
+            cout << " | ";
+         cout << board[row][col] <<" "; //printing the elements of the board
+      }
+      if(row == 2 || row == 5){ // for printing horizontal lines after 3rd and 6th row
+         cout << endl;
+         for(int i = 0; i<9; i++)
+            cout << "---";
+      }
+      cout << endl;
+}
 }
 
 void Sudoku::solveSudoku(vector<vector<int>>& sudoku){
