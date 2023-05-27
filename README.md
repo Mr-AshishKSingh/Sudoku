@@ -1,4 +1,4 @@
 <p align="center">
-  <img src="Banner.png">
+  <img src="IAMGES/Banner.png">
 </p>
 
