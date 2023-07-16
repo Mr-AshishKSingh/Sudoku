@@ -239,10 +239,15 @@ void Sudoku::module1(){
 
 
 void Sudoku::mainmenu(){
+    system("clear");
+    cout << "======================" << endl;
     cout << "Welcome to Sudoku Game" << endl;
-    cout << "1. Play Game" << endl;
-    cout << "2. Exit" << endl;
-    cout << "Enter your choice : " << endl;
+    cout << "======================" << endl;
+    cout << "   1. Play Game" << endl;
+    cout << "   2. Exit" << endl;
+    cout << "  Enter your choice : " << endl;
+    cout << "======================" << endl;
+    cout << ">>"    ;
     cin >> choice; // TAKING THE CHOICE FROM THE USER
 
     if(choice == 1){
