@@ -1,14 +1,29 @@
 #include <iostream>
 #include <vector>
 #include <ctime>
-#include <cstdlib>
-
+#include <cstdlib>  
+#include <unistd.h>
 using namespace std;
 
 class Sudoku{
     public:
     int rendom_number; // random number for module 2
     int choice; // VARIABLE TO STORE THE USER'S CHOICE
+
+
+
+    vector<vector<int>> inputsolutionboardformodule3{
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0}
+
+    };
 
 
     vector<vector<int>> inputboardformodule2{
@@ -189,6 +204,7 @@ class Sudoku{
     void rendomBoard(vector<vector<int>>& board); // FUNCTION TO GENERATE A RANDOM BOARD
     void getBoard(vector<vector<int>>& board); //FUNCTION TO GET THE BOARD FROM THE USER
     void getBoardformodule2(vector<vector<int>>& board); //FUNCTION TO GET THE BOARD FROM THE USER FOR MODULE 2
+    void getBoardformodule3(vector<vector<int>>& board); //FUNCTION TO GET THE BOARD FROM THE USER FOR MODULE 3
     void mainmenu(); //FUNCTION TO PRINT THE MAIN MENU
     void module1();//FUNCTION TO PRINT THE MODULE 1
     void module2();//FUNCTION TO PRINT THE MODULE 2
@@ -199,7 +215,7 @@ class Sudoku{
 void Sudoku::module3(){
     getBoard(inputboard); //GETTING INPUT FROM THE USER FOR THE BOARD
     solveSudoku(inputboard); //SOLVING THE BOARD
-    getBoardformodule2(inputboardformodule2); //GETTING THE SOLUTION  FROM THE USER OF THE INPUT BOARD
+    getBoardformodule3(inputboardformodule2); //GETTING THE SOLUTION  FROM THE USER OF THE INPUT BOARD
 
     if(inputboardformodule2 == inputboard){ //COMPARING THE SOLUTION WITH THE INPUT BOARD
         cout << "Correct Solution" << endl;
@@ -220,41 +236,83 @@ void Sudoku::module2(){
     getBoardformodule2(inputboardformodule2); //GETTING THE SOLUTION  FROM THE USER OF THE RENDOM BOARD
 
     if(inputboardformodule2 == board){ //COMPARING THE SOLUTION WITH THE RENDOM BOARD
-        cout << "Correct Solution" << endl;
+        system("clear");
+        sleep(1);
+        cout << "====================" <<endl;
+        cout << " |Correct Solution |" << endl;
+        cout << "====================" <<endl;
     }
     else{
-        cout << "Wrong Solution" << endl;
+        system("clear");
+        sleep(1);
+        cout << "====================" <<endl;
+        cout << "|  Wrong Solution  |" << endl;
+        cout << "====================" <<endl;
     }
 }
 
 void Sudoku::module1(){
     cout << "Enter the question : " << endl;
     getBoard(inputboard); // GETTING THE QUESTION FROM THE USER
-    cout << "Question : " << endl;
+    system("clear");
+    cout << "     =============================" << endl;
+    cout << "     |     ENTERED QUESTION      |" << endl;
+    cout << "     =============================" << endl;
+    cout << endl;
     printBoard(board); // PRINTING THE QUESTION
     solveSudoku(board); // SOLVING THE QUESTION
-    cout << "Solution : " << endl;
+    cout << endl << endl;
+    cout << "     =============================" << endl;
+    cout << "     |         Solution :         |" << endl;
+    cout << "     =============================" << endl;
+    cout << endl;
     printBoard(board); // PRINTING THE SOLVED SOLUTION
+
+    cout << endl << endl << endl;
+    cout << "=======================================" << endl;
+    cout << "| PRESS 1 TO RETURN TO MAIN MENU       |" << endl;
+    cout << "| PRESS 2 TO ENTER THE QUESTION AGAIN  |" << endl;
+    cout << "| PRESS 3 TO EXIT                      |"  << endl;
+    cout << "=======================================" << endl;
+
+    int choiceformodule1;
+    cin >> choiceformodule1;
+
+    if(choiceformodule1 == 1){
+        mainmenu();
+    }
+    else if(choiceformodule1 == 2){
+        module1();
+    }
+    else if(choiceformodule1 == 3){
+        exit(0);
+    }
+    else{
+        cout << "Wrong Choice" << endl;
+    }
+
 }
 
 
 void Sudoku::mainmenu(){
     system("clear");
-    cout << "======================" << endl;
-    cout << "Welcome to Sudoku Game" << endl;
-    cout << "======================" << endl;
-    cout << "   1. Play Game" << endl;
-    cout << "   2. Exit" << endl;
-    cout << "  Enter your choice : " << endl;
-    cout << "======================" << endl;
+    cout << "==========================" << endl;
+    cout << "| Welcome to Sudoku Game | " << endl;
+    cout << "==========================" << endl;
+    cout << "|   1. Play Game         |" << endl;
+    cout << "|   2. Exit              |" << endl;
+    cout << "|  Enter your choice :   |" << endl;
+    cout << "==========================" << endl;
     cout << ">>"    ;
     cin >> choice; // TAKING THE CHOICE FROM THE USER
 
     if(choice == 1){
-        cout << " 1 . Enter a question and get the solution" << endl; // FOR MODULE 1
-        cout << " 2 . Get a random question and solve it" << endl; // FOR MODULE 2
-        cout << " 3 . Enter a question and check solution validity" << endl; // FOR MODULE 3
-
+        system("clear");
+        cout << "====================================================" << endl;
+        cout << "| 1 . Enter a question and get the solution        |" << endl; // FOR MODULE 1
+        cout << "| 2 . Get a random question and solve it           |" << endl; // FOR MODULE 2
+        cout << "| 3 . Enter a question and check solution validity |" << endl; // FOR MODULE 3
+        cout << "====================================================" << endl;
         cout << "Enter your choice : " << endl;
         cin >> choice; //TAKING CHOICE FOR MODULE 1 , 2 , 3
 
@@ -283,12 +341,29 @@ void Sudoku::getBoardformodule2(vector<vector<int>>& inputboardformodule2){
 
     for (int i = 0 ; i < inputboardformodule2.size() ; i++){
         for (int j = 0 ; j < inputboardformodule2[0].size() ; j++){
-            inputboardformodule2[i][j] = 1; //INITIALISING A ELEMENT TO 1 IN BOARD WHERE USER HAS TO ENTER THE SOLUTION
+            if(inputboardformodule2[i][j] == 0){ //IF THE ELEMENT IS 0 THEN INITIALISE IT TO -1
+                inputboardformodule2[i][j] = -1;}
+                else{
+                    continue;
+                }
+            //inputboardformodule2[i][j] = -1; //INITIALISING A ELEMENT TO 1 IN BOARD WHERE USER HAS TO ENTER THE SOLUTION
             system("clear");
+            cout << "        =======================" <<endl;
+            cout << "        | QUESTION TO SOLVE IS| " << endl;
+            cout << "        =======================" <<endl;
             printBoard(inputboard); //PRINTING THE QUESTION BOARD SO THAT USER CAN TAKE THE REFERENCE
-            cout << "=======================" <<endl;
+            cout << endl;
+           
+            cout << endl;
+
+             cout <<"      =============================" <<endl;
+            cout << "      | ENTER YOUT SOLUTION BELOW |" << endl;
+            cout << "      =============================" <<endl;
             printBoard(inputboardformodule2);  //PRINTING THE BOARD WHERE USER HAS TO ENTER THE SOLUTION
-            cout << "Enter the number in place of 1 displayed in above grid " << endl;
+            cout << endl;
+            cout << "=============================================================" <<endl;
+            cout << "| Enter the number in place of [-1] displayed in above grid|" << endl;
+            cout << "============================================================" <<endl;
             cin >> inputboardformodule2[i][j]; //TAKING INPUT FROM THE USER IN PLACE OF 1 DISPLAYED IN THE BOARD
 
         }
@@ -296,19 +371,90 @@ void Sudoku::getBoardformodule2(vector<vector<int>>& inputboardformodule2){
     }
     
 }
+
+
+
+void Sudoku::getBoardformodule3(vector<vector<int>>& inputboardformodule2){
+
+    // for (int i = 0 ; i < inputboardformodule2.size() ; i++){
+    //     for (int j = 0 ; j < inputboardformodule2[0].size() ; j++){
+    //         if(inputboardformodule2[i][j] == 0){ //IF THE ELEMENT IS 0 THEN INITIALISE IT TO -1
+    //             inputboardformodule2[i][j] = -1;}
+    //             else{
+    //                 continue;
+    //             }
+    //         //inputboardformodule2[i][j] = -1; //INITIALISING A ELEMENT TO 1 IN BOARD WHERE USER HAS TO ENTER THE SOLUTION
+    //         system("clear");
+    //         cout << "        =======================" <<endl;
+    //         cout << "        | QUESTION TO SOLVE IS| " << endl;
+    //         cout << "        =======================" <<endl;
+    //         printBoard(inputboard); //PRINTING THE QUESTION BOARD SO THAT USER CAN TAKE THE REFERENCE
+    //         cout << endl;
+           
+    //         cout << endl;
+
+    //          cout <<"      =============================" <<endl;
+    //         cout << "      | ENTER YOUT SOLUTION BELOW |" << endl;
+    //         cout << "      =============================" <<endl;
+    //         printBoard(inputboardformodule2);  //PRINTING THE BOARD WHERE USER HAS TO ENTER THE SOLUTION
+    //         cout << endl;
+    //         cout << "=============================================================" <<endl;
+    //         cout << "| Enter the number in place of [-1] displayed in above grid|" << endl;
+    //         cout << "============================================================" <<endl;
+    //         cin >> inputboardformodule2[i][j]; //TAKING INPUT FROM THE USER IN PLACE OF 1 DISPLAYED IN THE BOARD
+
+    //     }
+    //     cout << endl;
+    // }
+
+
+
+    //printBoard(inputsolutionboardformodule3);
+
+    cout << "        =======================" <<endl;
+    cout << "        ENTER THE SOLUTION   " << endl;
+    cout << "        =======================" <<endl;
+
+    for(int i = 0 ; i < inputsolutionboardformodule3.size() ; i++){
+        for(int j = 0 ; j < inputsolutionboardformodule3[0].size() ; j++){
+            if(inputsolutionboardformodule3[i][j] == 0){
+                inputsolutionboardformodule3[i][j] = -1;
+            }
+            else{
+                continue;
+            }
+            system("clear");
+            printBoard(inputsolutionboardformodule3);
+            cout << endl;
+            cout << "=============================================================" << endl;
+            cout << "Enter the number in place of [-1] displayed in above grid" << endl;
+            cout << "=============================================================" << endl;
+
+            cin >> inputsolutionboardformodule3[i][j];
+        }
+    }
+
+
+    
+}
 void Sudoku::getBoard(vector<vector<int>>& inputboard){ //FUNCTION TO GET THE BOARD FROM THE USER
     for (int i = 0 ; i < inputboard.size() ; i++){
         for (int j = 0 ; j < inputboard[0].size() ; j++){
-            inputboard[i][j] = 1;
+            inputboard[i][j] = -1;
             system("clear");
-            printBoard(inputboard);  
-            cout << "Enter the number in place of 1 displayed in above grid " << endl;
+            cout << "=============================================================" << endl; 
+            cout << "|                                                           |" << endl;
+            cout << "=============================================================" << endl;
+            printBoard(inputboard); 
+            cout << "=============================================================" << endl; 
+            cout << "| Enter the number in place of [-1] displayed in above grid |" << endl;
+            cout << "=============================================================" << endl;
             cin >> inputboard[i][j];
 
         }
         cout << endl;
 
-        board = inputboard;
+        inputsolutionboardformodule3 = inputboard;
 
     
     }
@@ -379,11 +525,23 @@ void Sudoku::rendomBoard(vector<vector<int>>& board){ //FUNCTION TO GENERATE A R
 }
 
 void Sudoku::printBoard(vector<vector<int>>& board){ //FUNCTION TO PRINT THE BOARD
-    for (int i = 0 ; i < board.size() ; i++){ //LOOP TO PRINT THE BOARD
-        for (int j = 0 ; j < board[0].size() ; j++){
-            cout << board[i][j] << " "; //PRINTING THE ELEMENTS OF THE BOARD
+    
+    for (int row = 0; row < 9; row++) { //LOOP TO PRINT THE BOARD
+        cout << "\t";
+        for (int col = 0; col < 9; col++) { //column loop
+            if (col == 3 || col == 6) // for printing vertical lines after 3rd and 6th column
+                cout << " | ";
+            
+            cout << board[row][col] << " "; //printing the elements of the board
         }
-        cout << endl; //PRINTING A NEW LINE AFTER EACH ROW
+        if (row == 2 || row == 5) { // for printing horizontal lines after 3rd and 6th row
+            
+            cout << endl;
+            for (int i = 0; i < 8; i++)
+                cout << "     ";
+        }
+        cout << endl;
+        
     }
 }
 
@@ -413,6 +571,7 @@ bool Sudoku::solve(vector<vector<int>>& board){
             }
         }
     }
+    return true;
 }
 
 
